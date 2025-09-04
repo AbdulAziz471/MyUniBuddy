@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, GraduationCap } from "lucide-react";
 
@@ -6,10 +7,10 @@ export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
-    { name: "About", href: "/about" },
-    { name: "Features", href: "/features" },
-    { name: "How it Works", href: "/how-it-works" },
-    { name: "Contact", href: "/contact" },
+    { name: "About", path: "/about" },
+    { name: "Features", path: "/features" },
+    { name: "How it Works", path: "/how-it-works" },
+    { name: "Contact", path: "/contact" },
   ];
 
   return (
@@ -26,13 +27,17 @@ export const Navigation = () => {
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
               {navItems.map((item) => (
-                <a
+                <NavLink
                   key={item.name}
-                  href={item.href}
-                  className="text-foreground hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300"
+                  to={item.path}
+                  className={({ isActive }) =>
+                    `px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 ${
+                      isActive ? "text-primary" : "text-foreground hover:text-primary"
+                    }`
+                  }
                 >
                   {item.name}
-                </a>
+                </NavLink>
               ))}
             </div>
           </div>
@@ -40,9 +45,11 @@ export const Navigation = () => {
           {/* CTA */}
           <div className="hidden md:flex items-center space-x-4">
             <Button asChild variant="outline" className="mr-2">
-              <a href="/login">Login</a>
+              <NavLink to="/login">Login</NavLink>
             </Button>
-            <Button className="btn-hero">Get Started</Button>
+            <Button asChild className="btn-hero">
+              <NavLink to="/get-started">Get Started</NavLink>
+            </Button>
           </div>
 
           {/* Mobile menu button */}
@@ -62,19 +69,30 @@ export const Navigation = () => {
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-background/95 backdrop-blur-lg border-t border-border/50">
             {navItems.map((item) => (
-              <a
+              <NavLink
                 key={item.name}
-                href={item.href}
-                className="text-foreground hover:text-primary block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300"
+                to={item.path}
+                className={({ isActive }) =>
+                  `block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300 ${
+                    isActive ? "text-primary" : "text-foreground hover:text-primary"
+                  }`
+                }
+                onClick={() => setIsOpen(false)}
               >
                 {item.name}
-              </a>
+              </NavLink>
             ))}
             <div className="pt-4 space-y-2">
               <Button asChild variant="outline" className="w-full">
-                <a href="/login">Login</a>
+                <NavLink to="/login" onClick={() => setIsOpen(false)}>
+                  Login
+                </NavLink>
               </Button>
-              <Button className="btn-hero w-full">Get Started</Button>
+              <Button asChild className="btn-hero w-full">
+                <NavLink to="/get-started" onClick={() => setIsOpen(false)}>
+                  Get Started
+                </NavLink>
+              </Button>
             </div>
           </div>
         </div>
