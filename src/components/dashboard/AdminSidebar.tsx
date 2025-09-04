@@ -1,5 +1,4 @@
-import { Home, Users, Shield, FileText, GraduationCap, BookOpen, Settings, BarChart3, UserPlus, MessageCircle, Calendar, TrendingUp, ChevronDown } from "lucide-react";
-import { useSearchParams } from "react-router-dom";
+import { NavLink, useSearchParams } from "react-router-dom";
 import {
   Sidebar,
   SidebarContent,
@@ -18,6 +17,20 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import {
+  Home,
+  Users,
+  Shield,
+  FileText,
+  GraduationCap,
+  BookOpen,
+  Settings,
+  BarChart3,
+  UserPlus,
+  MessageCircle,
+  Calendar,
+  TrendingUp,
+} from "lucide-react";
 
 const adminMenuItems = [
   {
@@ -127,8 +140,8 @@ export function AdminSidebar() {
   const [searchParams] = useSearchParams();
   const currentPage = searchParams.get("page") || "dashboard";
 
-  const isActive = (url: string) => {
-    const urlParams = new URLSearchParams(url.split('?')[1]);
+  const isActive = (url) => {
+    const urlParams = new URLSearchParams(url.split("?")[1]);
     return urlParams.get("page") === currentPage;
   };
 
@@ -143,17 +156,19 @@ export function AdminSidebar() {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <a
-                    href={adminMenuItems[0].url}
-                    className={`flex items-center gap-3 px-3 py-2 mx-2 rounded-lg transition-colors ${
-                      isActive(adminMenuItems[0].url)
-                        ? "bg-primary text-primary-foreground"
-                        : "hover:bg-accent"
-                    }`}
+                  <NavLink
+                    to={`/dashboard${adminMenuItems[0].url}`}
+                    className={({ isActive }) =>
+                      `flex items-center gap-3 px-3 py-2 mx-2 rounded-lg transition-colors ${
+                        isActive(adminMenuItems[0].url)
+                          ? "bg-primary text-primary-foreground"
+                          : "hover:bg-accent text-muted-foreground hover:text-foreground"
+                      }`
+                    }
                   >
                     <Home className="w-5 h-5" />
                     {state !== "collapsed" && <span>{adminMenuItems[0].title}</span>}
-                  </a>
+                  </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>
@@ -164,8 +179,8 @@ export function AdminSidebar() {
           {state !== "collapsed" ? (
             <Accordion type="multiple" className="w-full space-y-2">
               {adminMenuItems.slice(1).map((section, index) => (
-                <AccordionItem 
-                  key={index} 
+                <AccordionItem
+                  key={index}
                   value={`section-${index}`}
                   className="border border-border/30 rounded-lg bg-card/30"
                 >
@@ -179,17 +194,19 @@ export function AdminSidebar() {
                       {section.items?.map((item, itemIndex) => (
                         <SidebarMenuItem key={itemIndex}>
                           <SidebarMenuButton asChild>
-                            <a
-                              href={item.url}
-                              className={`flex items-center gap-3 px-4 py-2 mx-2 rounded-md transition-colors text-sm ${
-                                isActive(item.url)
-                                  ? "bg-primary text-primary-foreground"
-                                  : "hover:bg-accent text-muted-foreground hover:text-foreground"
-                              }`}
+                            <NavLink
+                              to={`/dashboard${item.url}`}
+                              className={({ isActive }) =>
+                                `flex items-center gap-3 px-4 py-2 mx-2 rounded-md transition-colors text-sm ${
+                                  isActive(item.url)
+                                    ? "bg-primary text-primary-foreground"
+                                    : "hover:bg-accent text-muted-foreground hover:text-foreground"
+                                }`
+                              }
                             >
                               <item.icon className="w-4 h-4" />
                               <span>{item.title}</span>
-                            </a>
+                            </NavLink>
                           </SidebarMenuButton>
                         </SidebarMenuItem>
                       ))}
@@ -199,24 +216,25 @@ export function AdminSidebar() {
               ))}
             </Accordion>
           ) : (
-            // Collapsed state - show only icons
             <div className="space-y-2">
               {adminMenuItems.slice(1).map((section, index) => (
                 <div key={index} className="space-y-1">
                   {section.items?.map((item, itemIndex) => (
                     <SidebarMenuItem key={itemIndex}>
                       <SidebarMenuButton asChild>
-                        <a
-                          href={item.url}
-                          className={`flex items-center justify-center w-10 h-10 rounded-lg transition-colors ${
-                            isActive(item.url)
-                              ? "bg-primary text-primary-foreground"
-                              : "hover:bg-accent"
-                          }`}
+                        <NavLink
+                          to={`/dashboard${item.url}`}
+                          className={({ isActive }) =>
+                            `flex items-center justify-center w-10 h-10 rounded-lg transition-colors ${
+                              isActive(item.url)
+                                ? "bg-primary text-primary-foreground"
+                                : "hover:bg-accent"
+                            }`
+                          }
                           title={item.title}
                         >
                           <item.icon className="w-5 h-5" />
-                        </a>
+                        </NavLink>
                       </SidebarMenuButton>
                     </SidebarMenuItem>
                   ))}
