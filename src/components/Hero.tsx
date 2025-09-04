@@ -63,7 +63,7 @@ export const Hero = () => {
   const currentContent = roleContent[currentSlide];
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="py-20 relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-hero opacity-10" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(217_91%_60%/0.1),transparent_70%)]" />
@@ -74,7 +74,35 @@ export const Hero = () => {
       <div className="absolute bottom-20 left-20 w-24 h-24 bg-secondary/20 rounded-full blur-xl float delay-300" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        {/* Slider Controls */}
+       
+        {/* Main Content */}
+        <div className="animate-fade-in-up delay-200">
+          <Badge className="mb-6 bg-primary/20 text-primary border-primary/30 px-4 py-2">
+            <Sparkles className="w-4 h-4 mr-2" />
+            Your Complete University Companion
+          </Badge>
+          
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+            {currentContent.title}
+          </h1>
+          
+          <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+            {currentContent.subtitle}
+          </p>
+
+          {/* Feature highlights */}
+          <div className="flex flex-wrap justify-center gap-4 mb-10">
+            {currentContent.features.map((feature, index) => (
+              <Badge 
+                key={feature}
+                variant="outline" 
+                className="px-4 py-2 text-sm border-border/50 hover:border-primary/50 transition-colors duration-300"
+              >
+                {feature}
+              </Badge>
+            ))}
+          </div>
+ {/* Slider Controls */}
         <div className="flex justify-center items-center mb-8 animate-fade-in-up">
           <button 
             onClick={prevSlide}
@@ -111,33 +139,6 @@ export const Hero = () => {
           </button>
         </div>
 
-        {/* Main Content */}
-        <div className="animate-fade-in-up delay-200">
-          <Badge className="mb-6 bg-primary/20 text-primary border-primary/30 px-4 py-2">
-            <Sparkles className="w-4 h-4 mr-2" />
-            Your Complete University Companion
-          </Badge>
-          
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-            {currentContent.title}
-          </h1>
-          
-          <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-            {currentContent.subtitle}
-          </p>
-
-          {/* Feature highlights */}
-          <div className="flex flex-wrap justify-center gap-4 mb-10">
-            {currentContent.features.map((feature, index) => (
-              <Badge 
-                key={feature}
-                variant="outline" 
-                className="px-4 py-2 text-sm border-border/50 hover:border-primary/50 transition-colors duration-300"
-              >
-                {feature}
-              </Badge>
-            ))}
-          </div>
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -160,6 +161,7 @@ export const Hero = () => {
             </div>
           </div>
         </div>
+        
       </div>
     </section>
   );

@@ -50,11 +50,11 @@ const About = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className=" py-10  min-h-screen bg-background">
       <Navigation />
       
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
+      <section className=" relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
         {/* Background gradients */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-secondary/5" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,hsl(217_91%_60%/0.1),transparent_50%)]" />

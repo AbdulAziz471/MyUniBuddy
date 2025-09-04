@@ -9,6 +9,8 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background custom-scrollbar">
       <Navigation />
+      
+
       <Hero />
       <QADemo />
       <Showcase />

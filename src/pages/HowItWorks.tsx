@@ -128,7 +128,7 @@ const HowItWorks = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className=" py-10 min-h-screen bg-background">
       <Navigation />
       
       {/* Hero Section */}
