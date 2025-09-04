@@ -35,11 +35,16 @@ const Login = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-accent/5">
-      <div className="container mx-auto p-4">
+      <div className="container mx-auto p-4 flex items-center ">
         <div className="text-center py-8">
+           <h1 className="text-4xl font-bold gradient-text mb-4">
+            MY university Buddy 
+          </h1>
           <h1 className="text-4xl font-bold gradient-text mb-4">
             Academic Portal
           </h1>
+         
+
           <p className="text-xl text-muted-foreground">
             Choose your role to access the dashboard
           </p>
